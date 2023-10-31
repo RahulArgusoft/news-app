@@ -1,6 +1,7 @@
 const {generateToken} = require('../utils/jwt-token')
 const db = require('../services/user')
 const { verifyPassword, hashPassword } = require('../utils/bcrypt')
+const LocationService = require('../services/location')
 
 
 
@@ -15,6 +16,8 @@ const registerUser = async (req, res) => {
         await db.addTokenToDB(result.uid, token)
         
         delete result.password
+        delete result.uid
+        
         req.user = result
         req.token = token
     
@@ -45,11 +48,15 @@ const loginUser = async (req, res) => {
         const token = generateToken(user)
         await db.addTokenToDB(user.uid, token)
 
+        // const ip = req.ip;
+        const { city, country } = await LocationService.getchLocationFromIp()
+
         delete user.password
+        delete user.uid
 
         req.user = user;
         req.token = token;
-        res.status(200).send({ user, token })
+        res.status(200).send({ user, token, location: { city, country} })
 
     } catch (err) {
         res.status(400).send({ error: err.message})
@@ -64,10 +71,19 @@ const logoutUser = async (req, res) => {
         const result = await db.removeTokenFromDB(userData.uid, token)
 
         res.send({ status: 'logged out!', userData, token })
-
         
     } catch (error) {
         console.log(error.message);
+    }
+}
+
+const isUserLoggedIn = async (req, res) => {
+    try {
+        if(req.user) {
+            return res.status(200).send({ success: true })
+        }
+    } catch (error) {
+        return res.status.send({ success: false })
     }
 }
 
@@ -79,5 +95,6 @@ module.exports = {
     registerUser,
     loginUser,
     logoutUser,
-    logoutAllUser
+    logoutAllUser,
+    isUserLoggedIn
 }

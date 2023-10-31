@@ -1,10 +1,14 @@
 <template>
+  
   <v-card
     :loading="loading"
     class="mx-auto my-12"
     max-width="512"
     elevation="5"
   >
+
+  <the-comment v-if="comment"></the-comment>
+  
     <template v-slot:loader="{ isActive }">
       <v-progress-linear
         :active="isActive"
@@ -43,8 +47,8 @@
       <v-row align="center" class="mx-0">
         <div class="mb-4">
           <v-chip-group v-model="selection">
-            <v-chip size="small" v-for="tag in news.tags" :key="tag.tag_id" :to="tag.tag_id">{{
-              tag.tag_name
+            <v-chip size="small" v-for="tag in news.tags" :key="tag?.tag_id || tag" :to="tag.tag_id">{{
+              tag?.tag_name || tag
             }}</v-chip>
           </v-chip-group>
         </div>
@@ -57,7 +61,7 @@
       </div>
     </v-card-text>
 
-    <v-card-actions>
+    <v-card-actions v-if="news.source_name">
       Read more at
       <v-btn
         color="purple"
@@ -69,20 +73,29 @@
         {{ news.source_name }}
       </v-btn>
     </v-card-actions>
+    
+    <slot name="comment"></slot>
+
   </v-card>
 </template>
 
 <script>
+import TheComment from './dialogs/TheComment.vue';
+
 export default {
-  props: ["news"],
+  components: {
+    TheComment
+  },
+  props: ["news",],
   data() {
     return {
+      comment: false,
       loading: null,
       selection: null,
     };
   },
   created() {
-    console.log(this.news);
+    // console.log(this.news);
   },
 };
 </script>

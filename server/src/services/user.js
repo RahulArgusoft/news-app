@@ -30,8 +30,12 @@ const removeAllUserTokensFromDB = async (uid) => {
 }
 
 const fetchUserFromDB = async (username) => {
-    const result = await db.query('SELECT * from users where username = $1', [username])
-    return result[0]
+    try {
+        const result = await db.query('SELECT * from users where username = $1', [username])
+        return result[0]
+    } catch (error) {
+        throw error
+    }
 }
 
 const fetchUserWithUsernameAndPassword = async (username, password) => {
