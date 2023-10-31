@@ -1,9 +1,7 @@
 <template>
   <v-row justify="center" style="opacity: .6;">
     <v-dialog elevation-24 v-model="dialog" persistent width="1024" style="backdrop-filter: blur(1px);">
-      <!-- <template v-slot:activator="{ props }">
-        <v-btn color="primary" v-bind="props"> Open Dialog </v-btn>
-      </template> -->
+
       <v-card>
         <v-form @submit.prevent="onSubmit">
           <v-card-title>
@@ -17,8 +15,7 @@
                   <v-text-field
                     prepend-inner-icon="mdi-account"
                     readonly
-                    label="User"
-                    v-model="userName"
+                    v-model="userFullName"
                     variant="solo-filled"
                   ></v-text-field>
                 </v-col>
@@ -100,108 +97,16 @@
               {{ loading ? 'Posting...' : 'Post' }}
             </v-btn>
 
-            <!-- <v-btn color="blue-darken-1" variant="text" @click="isNewNews = false; dialog=false">
-            Close
-          </v-btn>
-          <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
-            Save
-          </v-btn> -->
           </v-card-actions>
         </v-form>
       </v-card>
     </v-dialog>
   </v-row>
 
-  <!-- <v-form @submit.prevent="onSubmit">
-    <v-card
-      width="80%"
-      class="mx-auto mt-6 px-4 py-4"
-      style="background-color: rgb(255, 255, 255)"
-    >
-      <div class="text-h4 d-flex mb-6">
-        <span class="mx-auto">New Post</span>
-      </div>
-
-      <v-row>
-        <v-col cols="12" sm="12">
-          <v-text-field
-            prepend-inner-icon="mdi-pencil"
-            label="Title"
-            v-model="title"
-            variant="solo-filled"
-            hint="Enter title"
-          ></v-text-field>
-        </v-col>
-
-        <v-col cols="12" sm="12">
-          <v-textarea
-            prepend-inner-icon="mdi-pencil"
-            label="Description"
-            v-model="description"
-            variant="solo-filled"
-            rows="3"
-            hint="Enter description of news"
-            counter="10"
-            persistent-counter
-          ></v-textarea>
-        </v-col>
-
-        <v-col cols="12" sm="3">
-          <v-select
-            chips
-            prepend-inner-icon="mdi-tag"
-            label="Select Tags"
-            v-model="tags"
-            :items="categories"
-            item-title="label"
-            item-value="tag"
-            multiple
-            variant="solo-filled"
-          ></v-select>
-        </v-col>
-
-        <v-col cols="12" sm="3">
-          <v-text-field
-            prepend-inner-icon="mdi-account"
-            readonly
-            label="User"
-            v-model="userName"
-            variant="solo-filled"
-          ></v-text-field>
-        </v-col>
-
-        <v-col cols="12" sm="6">
-          <v-text-field
-            prepend-inner-icon="mdi-link-variant"
-            label="Media URL"
-            variant="solo-filled"
-            v-model="image_url"
-          ></v-text-field>
-        </v-col>
-
-        <v-col cols="12" sm="12">
-          <v-text-field
-            prepend-inner-icon="mdi-map-marker"
-            readonly
-            :value="userLocation.city + ', ' + userLocation.country"
-            variant="solo-filled"
-          ></v-text-field>
-        </v-col>
-
-        <v-col cols="12" class="d-flex">
-          <div class="ml-auto">
-
-            <v-btn color="red" type="reset" class="mr-2">Cancel</v-btn>
-            <v-btn color="primary" type="submit" class="ml-auto">Save</v-btn>
-          </div>
-        </v-col>
-      </v-row>
-    </v-card>
-  </v-form> -->
+ 
 </template>
 
 <script>
-// import LocalNewsService from "@/services/LocalNewsService";
 import LocalNewsService from '@/services/LocalNewsService'
 
 export default {
@@ -255,6 +160,9 @@ export default {
     userName() {
       return this.$store.getters["user/user"].username;
     },
+    userFullName() {
+      return this.$store.getters["user/user"].name;
+    }
   },
   watch: {
     dialog() {
