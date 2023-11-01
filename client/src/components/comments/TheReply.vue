@@ -36,11 +36,6 @@
       </template>
     </v-textarea>
     </v-container>
-    
-
-    <div v-if="!showComments && replies.length">
-      <the-reply v-for="reply1 in replies" :key="reply1.id" :reply='reply1'></the-reply>
-    </div>
 
     <v-container v-if="comment">
       <comment-field
@@ -49,6 +44,10 @@
         @commentPosted="addComment"
       ></comment-field>
     </v-container>
+
+    <div v-if="!showComments && replies.length">
+      <the-reply v-for="reply1 in replies" :key="reply1.id" :reply='reply1'></the-reply>
+    </div>
   </div>
 </template>
 
@@ -69,6 +68,7 @@ export default {
   },
   methods: {
     addComment(comment) {
+      this.comment = !this.comment
       this.replies.unshift({ ...comment, name: this.userFullName });
     },
     async getReplies() {

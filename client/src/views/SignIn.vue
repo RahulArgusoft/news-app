@@ -118,6 +118,8 @@ export default {
       this.loading = false;
       this.$router.push('../')
 
+      this.$toast.success('Logged In Successfylly', { position: 'bottom-right', duration: 3000})
+
     }
   },
   computed: {

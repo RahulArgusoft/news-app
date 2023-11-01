@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div v-if="loading" class="d-flex justify-center mt-6">
-      <v-progress-circular indeterminate :size="30"></v-progress-circular>
-    </div>
-
+    
     <v-list-item
       v-if="isLoggedIn"
       prepend-avatar="https://as2.ftcdn.net/v2/jpg/01/75/80/15/1000_F_175801521_yoYpgKz6wEkTBw5ZotVvi2PJrlk8V3LJ.jpg"
@@ -11,6 +8,10 @@
       value="local-News"
       to="/local"
     ></v-list-item>
+
+    <div v-if="loading" class="d-flex justify-center mt-6">
+      <v-progress-circular indeterminate :size="30"></v-progress-circular>
+    </div>
 
     <v-list-item
       v-for="category in categories"

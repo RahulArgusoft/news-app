@@ -10,7 +10,11 @@
         ></comment-field>
       </v-container>
 
-      <v-divider :thickness=2 class="mx-0"></v-divider>
+      <span class="text-h5">
+        Comments <v-icon icon="mdi-chat" size="small"></v-icon
+      ></span>
+
+      <v-divider :thickness="2" class="mx-0"></v-divider>
 
       <the-reply
         v-for="reply in replies"

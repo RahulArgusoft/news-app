@@ -33,6 +33,7 @@ const auth = async (req, res, next) => {
 
     req.user = user;
     req.token = token;
+    req.userLocation = decoded.userLocation;
     next();
   } catch (error) {
     return res.status(401).send({ error1: error.message });

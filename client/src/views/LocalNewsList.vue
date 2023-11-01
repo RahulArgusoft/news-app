@@ -10,6 +10,10 @@
             </v-btn>
           </v-card-actions>
         </template>
+
+        <template v-slot:location>
+          <span class="me-1"><v-icon icon='mdi-map-marker'></v-icon> {{location.city}}, {{location.country}}</span>
+        </template>
       </news-card>
     </div>
 
@@ -132,6 +136,13 @@ export default {
     // Fetch news when the component is created
     await this.getAllNews();
     this.$store.dispatch("categories/fetchLocalTags");
+  },
+
+  computed: {
+    location() {
+      let data = JSON.parse(this.$store.getters['user/location'])
+      return data;
+    }
   },
 
   mounted() {

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-row class="align-center">
-      <v-col cols="12" sm="12">
+    <!-- <v-row class="align-center"> -->
+      <!-- <v-col cols="12" sm="12"> -->
         <v-textarea
-          rows="2"
+          rows="3"
           active
           :label="userFullName || username"
           :error-messages="v$.$errors.map((e) => e.$message)"
@@ -24,11 +24,11 @@
             >
           </template>
         </v-textarea>
-      </v-col>
+      <!-- </v-col> -->
       <!-- <v-col cols="12" sm="1">
         <v-btn @click="postComment" variant="plain">send</v-btn>
       </v-col> -->
-    </v-row>
+    <!-- </v-row> -->
   </div>
 </template>
 

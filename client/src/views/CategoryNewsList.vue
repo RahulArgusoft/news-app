@@ -14,7 +14,7 @@
       v-if="loading && !newsList.length"
       class="d-flex justify-center align-center mt-6"
     >
-      <v-progress-circular indeterminate :size="30"></v-progress-circular>
+      <v-progress-circular indeterminate :size="40"></v-progress-circular>
       <span class="text-grey text-h4 mx-2">Loading {{ category }} news...</span>
     </div>
 

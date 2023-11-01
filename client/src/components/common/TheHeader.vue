@@ -97,6 +97,7 @@ export default {
       } finally {
         this.loading = false;
         this.menu = false
+        this.$toast.success('Logged Out Successfully', { duration: 3000 })
       }
     },
   },

@@ -11,6 +11,7 @@ const getNews = async (req, res) => {
       ...item,
       created_at: dayjs(item.created_at).format("h:mm A on dddd, DD MMMM, YYYY"),
     }));
+    
     res.send({ response:temp });
   } catch (error) {
     res.status(500).send({ error: error.message });

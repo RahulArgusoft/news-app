@@ -45,11 +45,12 @@ const loginUser = async (req, res) => {
             throw new Error('invalid password!')
         }
 
-        const token = generateToken(user)
-        await db.addTokenToDB(user.uid, token)
-
         // const ip = req.ip;
         const { city, country } = await LocationService.getchLocationFromIp()
+
+        const token = generateToken({...user, city, country})
+        await db.addTokenToDB(user.uid, token)
+
 
         delete user.password
         delete user.uid

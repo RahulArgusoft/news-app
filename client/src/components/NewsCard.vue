@@ -37,9 +37,12 @@
         >
       </v-card-subtitle>
       <v-card-subtitle class="mt-1">
-        <span class="me-1"
+        <span class=""
           ><b class="text-black">Short by</b> {{ news.author_name }}</span
         >
+      </v-card-subtitle>
+      <v-card-subtitle class="mt-1">
+        <slot name="location"></slot>
       </v-card-subtitle>
     </v-card-item>
 

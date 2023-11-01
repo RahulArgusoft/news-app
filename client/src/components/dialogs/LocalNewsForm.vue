@@ -136,7 +136,7 @@ export default {
           title: this.title,
           content: this.description,
           image_url: this.image_url,
-          tags: this.tags
+          tags: this.tags,
         });
 
         this.loading = false;
